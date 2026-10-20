@@ -1,0 +1,124 @@
+SkyPlan Privacy Policy
+
+**Effective date:** October 20, 2026  
+**Last updated:** October 20, 2026
+
+SkyPlan is an Android weather, outdoor-planning, calendar-comparison, and commute-planning app. This Privacy Policy explains how **[Legal entity / developer name]** ("we," "us," or "our") handles information when you use SkyPlan, including its weather-service proxy.
+
+> Before publishing, replace **[Legal entity / developer name]**, **[privacy@yourdomain.com]**, and **[business address]** with your real details. Publish this policy at a public, non-geofenced URL and use that URL in Google Play Console.
+
+## Summary
+
+SkyPlan does not require an account. It uses a city you choose or your device location to provide weather forecasts. If you choose to connect a calendar, SkyPlan reads selected event details from your device solely to compare events with the forecast; those calendar details are not sent to SkyPlan’s servers or weather providers.
+
+SkyPlan sends location search terms, city names, ZIP/postal codes, or coordinates to its weather proxy. The proxy forwards the needed location query to WeatherAPI and temporarily caches weather responses. The app also makes direct requests to NASA GIBS, OpenStreetMap, and WeatherAPI map-tile services for the satellite and precipitation-map features. Optional route and traffic actions open Google Maps outside SkyPlan.
+
+We do not sell personal information, use advertising, or use a dedicated in-app analytics or crash-reporting SDK in the current version of SkyPlan.
+
+## Information SkyPlan handles
+
+| Information | Why it is used | Where it is kept or sent |
+| --- | --- | --- |
+| **Precise or approximate device location** | To look up weather for your current location when you choose “Use my location” | Read only after you grant Android location permission. The resulting coordinates are sent to the SkyPlan weather proxy as a weather query and may be saved locally as the selected location. |
+| **Places you enter or select** — such as a city, ZIP/postal code, coordinates, recent place, or commute destination | To retrieve weather, search places, compare a destination’s weather, and provide route links | Saved locally where described below. Sent to the SkyPlan weather proxy and then to WeatherAPI when a weather request is made. |
+| **Weather requests and proxy connection data** — such as requested endpoint, location query, requested date, forecast options, IP address, and standard request metadata | To deliver weather data, prevent abuse, operate the service, and maintain a short-lived shared weather cache | Processed by the SkyPlan proxy hosted on Cloudflare. Location queries and weather responses are temporarily stored in Cloudflare D1; IP addresses are used by the rate-limiting service and may be handled in infrastructure logs. |
+| **Calendar event details** — event title, location, start/end time, all-day status, and calendar name | To show weather fit for your calendar events when you choose “Connect calendar” | Read from the Android Calendar Provider only after you grant calendar permission. Kept in memory on your device for the current app session; not sent to our proxy, WeatherAPI, or another SkyPlan service. |
+| **Plans you create** — title, date, time, and activity type | To score your planned activity against the forecast | Saved locally on your device. |
+| **App settings and recent locations** — unit preference, alert choices, city, forecast length, pollen option, recent places, notification timestamps, and cached weather | To remember your choices, show saved forecasts, and avoid duplicate alerts | Saved locally on your device. |
+| **Satellite, map-tile, and route request data** | To load optional visual map features or open a route | Sent directly to the relevant external service as described in “External services and links.” |
+
+SkyPlan does not ask for your name, email address, contacts, photos, camera, microphone, or payment-card information. SkyPlan does not provide in-app purchases in the current version.
+
+## Location and weather requests
+
+Location access is optional. You can search for a city, town, ZIP/postal code, or coordinates instead of sharing your device location.
+
+When you use device location, SkyPlan asks Android for a current or recently known location after you grant permission. It sends the resulting latitude and longitude to the SkyPlan weather proxy to retrieve weather. The proxy sends the location query to WeatherAPI. A selected location may be saved in the app’s local settings and recent-location list so SkyPlan can show the forecast and optional alerts you requested.
+
+The weather proxy uses Cloudflare rate limiting keyed to the connecting IP address. It also stores a shared cache containing the weather query and the provider response. Cache entries are configured to expire after:
+
+- 10 minutes for forecast and place-search responses;
+- 1 hour for marine responses; and
+- 24 hours for astronomy and historical-weather responses.
+
+Expired cache rows are removed by scheduled maintenance. A monthly, aggregate provider-usage counter is also stored; it is not designed to identify individual users.
+
+## Calendar connection
+
+Calendar access is optional and is read-only. If you choose **Connect calendar** and grant Android’s calendar permission, SkyPlan reads upcoming instances from visible, synced Google calendars available through the Android Calendar Provider. It uses the event title, location, date/time, all-day status, and calendar name to compare the event with local forecast hours.
+
+Calendar data stays on your device and is held in memory while the feature is active. It is not included in requests to the SkyPlan proxy, WeatherAPI, map providers, or Google Maps. You can disconnect the feature in SkyPlan or revoke calendar permission in Android Settings.
+
+## Notifications
+
+With your permission, SkyPlan can send local notifications for upcoming rain, high UV, or falling pressure. If you enable an alert, Android may run SkyPlan periodically in the background to obtain a weather forecast for your selected location. The notification itself is created locally on your device. The forecast lookup follows the location and weather-request practices described above.
+
+You can turn alerts off in SkyPlan settings or revoke notification permission in Android Settings.
+
+## External services and links
+
+SkyPlan relies on external services to provide features. These services may receive your IP address, device or browser information, the request time, and the information included in the request. Their handling of information is governed by their own terms and privacy policies.
+
+- **Cloudflare Workers, D1, and rate limiting** host and operate the SkyPlan weather proxy, temporary cache, and abuse controls. Cloudflare’s service may process request metadata and runtime observability data.
+- **WeatherAPI** receives the location query needed to return forecast, search, astronomy, historical-weather, marine, air-quality, pollen, and alert data.
+- **NASA GIBS** receives a map bounding-box request generated from the forecast location when you view satellite imagery.
+- **OpenStreetMap** receives a map-tile request representing the area shown in the precipitation map. The app identifies itself as `SkyPlan/1.0 (Android; weather map)` when it requests an OpenStreetMap base tile.
+- **WeatherAPI map tiles** receive regional tile requests for the precipitation-map overlay.
+- **Google Maps** receives the route origin and destination, or map center, only when you choose **Open route in Google Maps** or **View traffic map**. These actions open Google Maps or another handler outside SkyPlan.
+- **Android and Google Play services** may process information needed to provide device location, notifications, backups, and app distribution under their own policies.
+
+## Data stored on your device
+
+SkyPlan stores the following locally using Android app storage: selected city or coordinates, up to five recent locations, commute destination, plans you create, app settings, alert timestamps, and cached weather responses. This helps the app work smoothly and display previously loaded forecast data if a new request fails.
+
+Depending on your Android device and backup settings, Android may include app data in device backups or transfers. Those backups are controlled by you and your platform provider. You can remove SkyPlan’s locally stored data by clearing the app’s storage in Android Settings or uninstalling the app. You can remove individual plans in the app.
+
+## What we do not do
+
+In the current version of SkyPlan, we do not:
+
+- sell or rent personal information;
+- serve ads or use information for targeted advertising;
+- create a SkyPlan user account or require sign-in;
+- use a dedicated advertising, product-analytics, or crash-reporting SDK;
+- send calendar event details to our servers, WeatherAPI, or map providers; or
+- make automated decisions that produce legal or similarly significant effects about you.
+
+If we add accounts, advertising, payments, analytics, cloud sync, or another material data use, we will update this policy before or when the change takes effect, as required by applicable law.
+
+## Security and retention
+
+We use HTTPS for the production weather service and rely on Android, Cloudflare, and our service providers’ security features. No method of transmission or storage is completely secure, so we cannot guarantee absolute security.
+
+On our weather proxy, cache entries are retained only for the configured periods described above and are scheduled for deletion after expiry. We may retain aggregate service-usage records and security or operational records for as long as reasonably necessary to operate, secure, and improve the service, comply with law, or resolve disputes. Local app data remains on your device until you remove it or your device/back-up provider removes it under its policies.
+
+## Your choices and rights
+
+You can:
+
+- search for a location manually instead of granting device-location permission;
+- revoke location, calendar, and notification permissions in Android Settings;
+- disconnect calendar access in SkyPlan;
+- change or remove plans and settings in SkyPlan; and
+- clear app storage or uninstall SkyPlan to remove locally stored app data.
+
+If privacy law in your location gives you rights to access, correct, delete, restrict, object to, or receive a copy of personal information, contact us at the address below. We will respond as required by applicable law. For information held directly by an external provider, such as WeatherAPI, Cloudflare, NASA, OpenStreetMap, Google Maps, or your platform provider, you may need to contact that provider directly.
+
+## Children
+
+SkyPlan is not directed to children and is not designed to knowingly collect personal information from children. If you believe a child has provided personal information directly to us, contact us and we will address the request. Parents and guardians should manage an eligible child’s app permissions and use of external links.
+
+## International processing
+
+Cloudflare, WeatherAPI, NASA, OpenStreetMap, Google Maps, and Android/Google services may process request data in countries other than the country where you live. Their international data practices are governed by their own policies and safeguards.
+
+## Changes to this policy
+
+We may update this policy to reflect changes to SkyPlan, its service providers, data practices, or legal requirements. We will post the updated version with a revised “Last updated” date. Where required, we will provide additional notice or request consent.
+
+## Contact us
+
+For privacy questions or requests, contact:
+
+**[Legal entity / developer name]**  
+**Email:** shaheen17995@gmail.com
